@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\ProposalController;

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Proposal;
 use App\Models\Comment;
 use App\Models\Reply;
-use App\Notifications\SmsNotification;
+use Illuminate\Support\Facades\Http;
 
 class ProposalController extends Controller
 {
@@ -45,7 +45,46 @@ class ProposalController extends Controller
         $proposal->entered_by=$request->entered_by;
         $proposal->save();
 
+        $mobile = $request->input('mobile');
+        $ref = $string;
+
+        // $notification = Http::post('https://cpsolutions.dialog.lk/index.php/cbs/sms/send',['destination' => 94719726803,'q' => '15410663919439','message' => 'Hii Singh. This is a test message.']);
+
+        // Http::post('https://cpsolutions.dialog.lk/index.php/cbs/sms/send?destination=94719726803&q=15410663919439&message=HI SIGA');
+
+        // $notification = Http::post('https://cpsolutions.dialog.lk/index.php/cbs/sms/send?destination=94719726803&q=15410663919439&message=Your proposal was approved. Your reference number is {{$ref}}');
+
+
+        // $url = Http::post('https://cpsolutions.dialog.lk/index.php/cbs/sms/send');
+        // $notification = $request->fullUrlWithQuery(['destination' => '94719726803',
+        //                                     'q' => '15410663919439',
+        //                                     'message' => 'Your proposal was approved.']);
+
+        // return back()->with('msg', 'The proposal was successfully added.');
+
+
+        //get Parameters
+        $array = [
+            'destination' => $mobile,
+            'q' => '15410663919439',
+            'message' => '[This is a test message] Your proposal is approved . Your Reference Number is '. $ref 
+        ];
+
+        $baseUrl = 'https://cpsolutions.dialog.lk/index.php/cbs/sms/send';
+
+        $json = json_encode($array);
+
+        $query = (http_build_query(json_decode($json)));
+
+        $url = \Illuminate\Support\Str::finish($baseUrl,'?');
+
+        $fullUrl = $url.$query;
+
+        Http::post($fullUrl);
+
         return back()->with('msg', 'The proposal was successfully added.');
+
+        // return $notification;
     }
 
 
