@@ -28,7 +28,7 @@ class ProposalController extends Controller
             'status' => 'required',
             'team' => 'required',
             'organized_by' => 'required',
-            'mobile' => 'required|min:10',
+            'mobile' => 'required|digits:9',
             'data_time' => 'required',
             'entered_by' => 'required',
         ]);
@@ -47,21 +47,6 @@ class ProposalController extends Controller
 
         $mobile = $request->input('mobile');
         $ref = $string;
-
-        // $notification = Http::post('https://cpsolutions.dialog.lk/index.php/cbs/sms/send',['destination' => 94719726803,'q' => '15410663919439','message' => 'Hii Singh. This is a test message.']);
-
-        // Http::post('https://cpsolutions.dialog.lk/index.php/cbs/sms/send?destination=94719726803&q=15410663919439&message=HI SIGA');
-
-        // $notification = Http::post('https://cpsolutions.dialog.lk/index.php/cbs/sms/send?destination=94719726803&q=15410663919439&message=Your proposal was approved. Your reference number is {{$ref}}');
-
-
-        // $url = Http::post('https://cpsolutions.dialog.lk/index.php/cbs/sms/send');
-        // $notification = $request->fullUrlWithQuery(['destination' => '94719726803',
-        //                                     'q' => '15410663919439',
-        //                                     'message' => 'Your proposal was approved.']);
-
-        // return back()->with('msg', 'The proposal was successfully added.');
-
 
         //get Parameters
         $array = [
@@ -84,7 +69,6 @@ class ProposalController extends Controller
 
         return back()->with('msg', 'The proposal was successfully added.');
 
-        // return $notification;
     }
 
 
@@ -110,10 +94,13 @@ class ProposalController extends Controller
             'status' => 'required',
             'team' => 'required',
             'organized_by' => 'required',
-            'mobile' => 'required|min:10',
+            'mobile' => 'required|digits:9',
             'data_time' => 'required',
             'entered_by' => 'required',
         ]);
+
+        $mobile = $request->input('mobile');
+        $ref = $request->input('reference_number');
 
         DB::table('proposals')->where('id', $request->id)->update([
             'subject'=>$request->subject,
@@ -124,6 +111,26 @@ class ProposalController extends Controller
             'entered_date_time'=>$request->data_time,
             'entered_by'=>$request->entered_by,
         ]);
+
+                //get Parameters
+                $array = [
+                    'destination' => $mobile,
+                    'q' => '15410663919439',
+                    'message' => '[This is a test message] Your proposal is approved . Your Reference Number is '. $ref 
+                ];
+        
+                $baseUrl = 'https://cpsolutions.dialog.lk/index.php/cbs/sms/send';
+        
+                $json = json_encode($array);
+        
+                $query = (http_build_query(json_decode($json)));
+        
+                $url = \Illuminate\Support\Str::finish($baseUrl,'?');
+        
+                $fullUrl = $url.$query;
+        
+                Http::post($fullUrl);
+
         return redirect()->to('/user/manage-proposals')->with('msg', 'The proposal was successfully updated.');
     }
 
@@ -156,6 +163,7 @@ class ProposalController extends Controller
         $comment->user_id=$request->user_id;
         $comment->comment=$request->comment;
         $comment->proposal_id=$request->proposal_id;
+        $comment->comment_type=$request->public;
 
         $comment->save();
         return redirect()->back();

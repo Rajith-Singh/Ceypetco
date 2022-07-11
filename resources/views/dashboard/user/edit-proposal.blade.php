@@ -143,6 +143,10 @@
 
         <input type="hidden" name="id" value="{{$data->id}}">
 
+            <div class="col-md-12">
+                <label class="form-label"> <b> Reference Number </b> </label>
+                <input type="text" class="form-control py-2" name="reference_number" value="{{$data->reference_number}}" readonly>
+            </div>
 			
 			<div class="col-md-12">
                 <label class="form-label"> <b> Subject </b> </label>
@@ -153,7 +157,7 @@
 			<div class="col-md-6">
                 <label class="form-label"> <b> Status </b> </label>
                 <select class="form-control inputstl" name="status">
-                    <option selected disabled value="">{{$data->status}}</option>
+                        <option>{{$data->status}}</option>
                         <option> Sample Status 1 </option>
                         <option> Sample Status 2 </option>
                         <option> Sample Status 3 </option>
@@ -165,7 +169,7 @@
             <div class="col-md-6">
                 <label class="form-label"> <b> Team </b> </label>
                 <select class="form-control inputstl" name="team">
-                    <option selected disabled value="">{{$data->team}}</option>
+                        <option>{{$data->team}}</option>
                         <option> 1 </option>
                         <option> 2 </option>
                         <option> 3 </option>
@@ -177,7 +181,7 @@
             <div class="col-md-6">
                 <label class="form-label"> <b> Organized by </b> </label>
                 <select class="form-control inputstl" name="organized_by">
-                    <option selected disabled value="">{{$data->organized_by}}</option>
+                        <option>{{$data->organized_by}}</option>
                         <option> 1 </option>
                         <option> 2 </option>
                         <option> 3 </option>
@@ -188,7 +192,15 @@
 			
             <div class="col-md-6">
                 <label class="form-label"> <b> Mobile Number </b> </label>
-                <input type="text" class="form-control py-2" name="mobile">
+                <div class="row">
+                    <div class="col-md-2">
+                        <input type="text" class="form-control py-2" value="+94" readonly>
+                    </div>
+
+                    <div class="col-md-10">
+                        <input type="text" class="form-control py-2" name="mobile" value="{{$data->mobile}}">
+                    </div>
+                </div> 
                 <span class="text-danger">@error('mobile'){{ $message }} @enderror </span>
             </div>
 

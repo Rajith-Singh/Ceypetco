@@ -189,8 +189,16 @@
 
             <div class="col-md-6">
                 <label class="form-label"> <b> Mobile Number </b> </label>
-                <input type="text" class="form-control py-2" name="mobile">
-                <span class="text-danger">@error('mobile'){{ $message }} @enderror </span>
+                <div class="row">
+                    <div class="col-md-2">
+                        <input type="text" class="form-control py-2" value="+94" readonly>
+                    </div>
+
+                    <div class="col-md-10">
+                        <input type="text" class="form-control py-2" name="mobile">
+                    </div>
+                </div>    
+                        <span class="text-danger">@error('mobile'){{ $message }} @enderror </span>
             </div>
 			
 			<div class="col-md-12">
