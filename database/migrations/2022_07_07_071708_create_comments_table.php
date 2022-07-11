@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('comment')->nullable();
             $table->string('user_id')->nullable();
             $table->String('proposal_id');
-            $table->string('comment_type')->default('CPC Only');
+            $table->string('comment_type')->nullable();
             $table->timestamps();
         });
     }

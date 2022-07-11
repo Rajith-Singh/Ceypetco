@@ -15,6 +15,14 @@ return new class extends Migration
     {
         Schema::create('backups', function (Blueprint $table) {
             $table->id();
+            $table->string('reference_number');
+            $table->string('subject');
+            $table->string('status');
+            $table->string('team');
+            $table->string('organized_by');
+            $table->string('mobile');
+            $table->string('entered_date_time');
+            $table->string('entered_by');
             $table->timestamps();
         });
     }

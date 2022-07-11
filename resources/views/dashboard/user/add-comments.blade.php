@@ -316,14 +316,14 @@
         <form action="/add_reply" method="POST">
             @csrf
             <div class="col-md-3">
-                <input type="text" id="commentID" name="commentID" hidden>
+                <input type="text" id="commentID" name="commentID" value="{{$row->id}}" hidden>
                 <input type="text" class="form-control py-2" name="user_name" value="{{ Auth::guard('web')->user()->name }}" readonly hidden>   
                 <input type="text" class="form-control py-2" name="user_id" value="{{ Auth::guard('web')->user()->id }}" readonly hidden>       
                 <input type="text" class="form-control py-2" name="proposal_id" value="{{$row->proposal_id}}" readonly hidden>                           
 
-                <textarea class="form-control" style="height:100px; width:500px" placeholder="Write something here."></textarea>
+                <textarea class="form-control" style="height:100px; width:500px" name="reply" placeholder="Write something here."></textarea>
                 <br>
-                <input type="submit" name="reply" class="btn btn-primary" value="Reply">
+                <input type="submit" class="btn btn-primary" value="Reply">
             </div>    
         </form>    
         </div>

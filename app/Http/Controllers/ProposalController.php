@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Proposal;
 use App\Models\Comment;
 use App\Models\Reply;
+use App\Models\Backup;
 use Illuminate\Support\Facades\Http;
 
 class ProposalController extends Controller
@@ -34,6 +35,18 @@ class ProposalController extends Controller
         ]);
 
         $proposal = new Proposal;
+
+        $proposal->reference_number=$string;
+        $proposal->subject=$request->subject;
+        $proposal->status=$request->status;
+        $proposal->team=$request->team;
+        $proposal->organized_by=$request->organized_by;
+        $proposal->mobile=$request->mobile;
+        $proposal->entered_date_time=$request->data_time;
+        $proposal->entered_by=$request->entered_by;
+        $proposal->save();
+
+        $proposal = new Backup;
 
         $proposal->reference_number=$string;
         $proposal->subject=$request->subject;
@@ -112,6 +125,19 @@ class ProposalController extends Controller
             'entered_by'=>$request->entered_by,
         ]);
 
+        $proposal = new Backup;
+
+        $proposal->reference_number=$ref;
+        $proposal->subject=$request->subject;
+        $proposal->status=$request->status;
+        $proposal->team=$request->team;
+        $proposal->organized_by=$request->organized_by;
+        $proposal->mobile=$request->mobile;
+        $proposal->entered_date_time=$request->data_time;
+        $proposal->entered_by=$request->entered_by;
+        $proposal->save();
+
+
                 //get Parameters
                 $array = [
                     'destination' => $mobile,
@@ -181,6 +207,65 @@ class ProposalController extends Controller
         $reply->save();
         return redirect()->back();
     }
+
+    public function getProposal(Request $request){
+
+        $proposal = Proposal::where('reference_number', '=', $request->reference_number)->first();
+        $reference_number = DB::table('proposals')
+                                ->select('reference_number')
+                                ->where('reference_number', '=', $request->reference_number)
+                                ->pluck('reference_number')   
+                                ->first(); 
+
+        $proposal_id = DB::table('proposals')
+                                ->select('id')
+                                ->where('reference_number', '=', $request->reference_number)
+                                ->pluck('id')   
+                                ->first();                         
+                         
+
+        // $data = DB::table('proposals')
+        //             ->join('comments', 'proposals.id', '=', 'comments.proposal_id')
+        //             ->select('proposals.reference_number', 
+        //                     'proposals.subject', 
+        //                     'proposals.status',
+        //                     'proposals.team',
+        //                     'proposals.organized_by',
+        //                     'proposals.mobile',
+        //                     'proposals.entered_date_time',
+        //                     'comments.comment')
+        //             ->where('proposals.reference_number', '=', $reference_number)      
+        //             ->where('comments.proposal_id', '=', "proposals.id")          
+        //             ->get(); 
+
+        $data = DB::table('proposals')
+                    ->select('reference_number', 
+                            'subject', 
+                            'status',
+                            'team',
+                            'organized_by',
+                            'mobile',
+                            'entered_date_time')
+                    ->where('reference_number', '=', $reference_number)        
+                    ->get(); 
+
+        $comment = DB::table('comments')
+                    ->select('comment','name','comment_type')
+                    ->where('proposal_id', '=', $proposal_id) 
+                    ->where('comment_type', '=', 'Public')
+                    ->get(); 
+
+
+        if(!$proposal){
+            return back()->with('fail', 'The reference number is incorrect');
+        }else{
+            return view('get-proposal')->with('data',$data)->with('comment',$comment);
+            // return dd($comment);
+        }
+    }
+
+
+    
 
 }
 

@@ -83,5 +83,13 @@ Route::post('/add_comment', [ProposalController::class, 'add_comment']);
 
 Route::post('/add_reply', [ProposalController::class, 'add_reply']);
 
+Route::post('/get-proposal', [ProposalController::class, 'getProposal']);
+
+// Route::get('/get-proposal', function () {
+//     return view('get-proposal');
+// });
+
+
+
 
 

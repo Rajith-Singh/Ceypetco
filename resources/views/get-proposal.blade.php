@@ -99,135 +99,57 @@
     </div>
     <!-- Header End -->
 
-
-    <!--  Quote Request Start -->
-    <div class="container-fluid bg-secondary my-5">
+        <!-- Features Start -->
+        @foreach($data as $data)
+        <div class="container-fluid bg-secondary my-5">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-7 py-5 py-lg-0">
-                    <h6 class="text-primary text-uppercase font-weight-bold">Get A Quote</h6>
-                    <h1 class="mb-4">Request A Free Quote</h1>
-                    <p class="mb-4">Dolores lorem lorem ipsum sit et ipsum. Sadip sea amet diam dolore sed et. Sit rebum labore sit sit ut vero no sit. Et elitr stet dolor sed sit et sed ipsum et kasd ut. Erat duo eos et erat sed diam duo</p>
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <h1 class="text-primary mb-2" data-toggle="counter-up">225</h1>
-                            <h6 class="font-weight-bold mb-4">SKilled Experts</h6>
-                        </div>
-                        <div class="col-sm-4">
-                            <h1 class="text-primary mb-2" data-toggle="counter-up">1050</h1>
-                            <h6 class="font-weight-bold mb-4">Happy Clients</h6>
-                        </div>
-                        <div class="col-sm-4">
-                            <h1 class="text-primary mb-2" data-toggle="counter-up">2500</h1>
-                            <h6 class="font-weight-bold mb-4">Complete Projects</h6>
-                        </div>
-                    </div>
-                </div>
                 <div class="col-lg-5">
-                    <div class="bg-primary py-5 px-4 px-sm-5">
-                        <form class="py-5">
-                            <div class="form-group">
-                                <input type="text" class="form-control border-0 p-4" placeholder="Your Name" required="required" />
-                            </div>
-                            <div class="form-group">
-                                <input type="email" class="form-control border-0 p-4" placeholder="Your Email" required="required" />
-                            </div>
-                            <div class="form-group">
-                                <select class="custom-select border-0 px-4" style="height: 47px;">
-                                    <option selected>Select A Service</option>
-                                    <option value="1">Service 1</option>
-                                    <option value="2">Service 1</option>
-                                    <option value="3">Service 1</option>
-                                </select>
-                            </div>
-                            <div>
-                                <button class="btn btn-dark btn-block border-0 py-3" type="submit">Get A Quote</button>
-                            </div>
-                        </form>
-                    </div>
+                    <img class="img-fluid w-100" src="/img/feature.jpg" alt="">
+                </div>
+                <div class="col-lg-7 py-5 py-lg-0">
+                    <h1 class="mb-4">{{$data->reference_number}}</h1>
+                    <p class="mb-4">{{$data->subject}}</p>
+                    <ul class="list-inline">
+                        <li><h6><i class="far fa-dot-circle text-primary mr-3"></i><font color="#FF4800"> Status </font> : &nbsp&nbsp&nbsp {{$data->status}}</h6>
+                        <li><h6><i class="far fa-dot-circle text-primary mr-3"></i><font color="#FF4800"> Team </font> : &nbsp&nbsp&nbsp {{$data->team}}</h6></li>
+                        <li><h6><i class="far fa-dot-circle text-primary mr-3"></i><font color="#FF4800"> Organised by </font> : &nbsp&nbsp&nbsp </i>{{$data->organized_by}}</h6></li>
+                        <li><h6><i class="far fa-dot-circle text-primary mr-3"></i><font color="#FF4800"> Mobile </font> : &nbsp&nbsp&nbsp </i>{{$data->mobile}}</h6></li>
+                        <li><h6><i class="far fa-dot-circle text-primary mr-3"></i><font color="#FF4800"> Date </font> : &nbsp&nbsp&nbsp </i>{{$data->entered_date_time}}</h6></li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Quote Request Start -->
+    @endforeach
+    <!-- Features End -->
 
 
-            <!--  Get Details -->
-            <div class="container-fluid bg-secondary my-5">
-        <div class="container">
-            <div class="row align-items-center">
-            <div class="col-lg-12">
-                    <div class="bg-primary py-5 px-4 px-sm-5">
-                        <form class="py-5" action="/get-proposal" method="POST">
-
-                        @if(Session::get('fail'))
-                            <div class="alert alert-danger">  
-                                {{ Session::get('fail') }}
-                            </div>
-                        @endif
-
-                            @csrf
-                            <div class="form-group">
-                                <input type="text" class="form-control border-0 p-4" placeholder="Your Reference Number" name="reference_number" required="required" />
-                            </div>
-                            <div>
-                                <button class="btn btn-dark btn-block border-0 py-3" type="submit">Search</button>
-                            </div>
-                        </form>
+        @foreach($comment as $comment)    
+            <div class="container my-2 py-2">
+            <div class="row d-flex justify-content-center">
+            <div class="col-md-12 col-lg-10 col-xl-8">
+                <div class="card">
+                <div class="card-body">
+                    <div class="d-flex flex-start align-items-center">
+                    <img class="rounded-circle shadow-1-strong me-3"
+                        src="/img/Ceylon_Petroleum_Corporation_logo.png" alt="avatar" width="60"
+                        height="60" />
+                    <div>
+                        <h6 class="fw-bold text-primary mb-1">{{$comment->name}}</h6>
                     </div>
-                </div>
+                    </div>
+
+                    <p class="mt-3 mb-4 pb-2">
+                        {{$comment->comment}}
+                    </p>
 
                 </div>
+                </div>
+            </div>
             </div>
         </div>
-    </div>
-    <!-- Get Details -->
-
-
-    <!-- Services Start -->
-    <div class="container-fluid pt-5">
-        <div class="container">
-            <div class="text-center pb-2">
-                <h6 class="text-primary text-uppercase font-weight-bold">Our Services</h6>
-                <h1 class="mb-4">Best Logistic Services</h1>
-            </div>
-            <div class="row pb-3">
-                <div class="col-lg-3 col-md-6 text-center mb-5">
-                    <div class="d-flex align-items-center justify-content-center bg-primary mb-4 p-4">
-                        <i class="fa fa-2x fa-plane text-dark pr-3"></i>
-                        <h6 class="text-white font-weight-medium m-0">Air Freight</h6>
-                    </div>
-                    <p>Diam amet eos at no eos sit lorem, amet rebum ipsum clita stet diam sea est diam</p>
-                    <a class="border-bottom text-decoration-none" href="">Read More</a>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center mb-5">
-                    <div class="d-flex align-items-center justify-content-center bg-primary mb-4 p-4">
-                        <i class="fa fa-2x fa-ship text-dark pr-3"></i>
-                        <h6 class="text-white font-weight-medium m-0">Ocean Freight</h6>
-                    </div>
-                    <p>Diam amet eos at no eos sit lorem, amet rebum ipsum clita stet diam sea est diam</p>
-                    <a class="border-bottom text-decoration-none" href="">Read More</a>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center mb-5">
-                    <div class="d-flex align-items-center justify-content-center bg-primary mb-4 p-4">
-                        <i class="fa fa-2x fa-truck text-dark pr-3"></i>
-                        <h6 class="text-white font-weight-medium m-0">Land Transport</h6>
-                    </div>
-                    <p>Diam amet eos at no eos sit lorem, amet rebum ipsum clita stet diam sea est diam</p>
-                    <a class="border-bottom text-decoration-none" href="">Read More</a>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center mb-5">
-                    <div class="d-flex align-items-center justify-content-center bg-primary mb-4 p-4">
-                        <i class="fa fa-2x fa-store text-dark pr-3"></i>
-                        <h6 class="text-white font-weight-medium m-0">Cargo Storage</h6>
-                    </div>
-                    <p>Diam amet eos at no eos sit lorem, amet rebum ipsum clita stet diam sea est diam</p>
-                    <a class="border-bottom text-decoration-none" href="">Read More</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Services End -->
+        @endforeach
 
 
         <!-- Footer Start -->
