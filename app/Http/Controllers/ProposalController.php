@@ -8,6 +8,7 @@ use App\Models\Proposal;
 use App\Models\Comment;
 use App\Models\Reply;
 use App\Models\Backup;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 
 class ProposalController extends Controller
@@ -30,7 +31,6 @@ class ProposalController extends Controller
             'team' => 'required',
             'organized_by' => 'required',
             'mobile' => 'required|digits:9',
-            'data_time' => 'required',
             'entered_by' => 'required',
         ]);
 
@@ -42,7 +42,7 @@ class ProposalController extends Controller
         $proposal->team=$request->team;
         $proposal->organized_by=$request->organized_by;
         $proposal->mobile=$request->mobile;
-        $proposal->entered_date_time=$request->data_time;
+        $proposal->entered_date_time=Carbon::now('Asia/Kolkata');
         $proposal->entered_by=$request->entered_by;
         $proposal->save();
 
@@ -54,7 +54,7 @@ class ProposalController extends Controller
         $proposal->team=$request->team;
         $proposal->organized_by=$request->organized_by;
         $proposal->mobile=$request->mobile;
-        $proposal->entered_date_time=$request->data_time;
+        $proposal->entered_date_time=Carbon::now('Asia/Kolkata');
         $proposal->entered_by=$request->entered_by;
         $proposal->save();
 
@@ -108,7 +108,6 @@ class ProposalController extends Controller
             'team' => 'required',
             'organized_by' => 'required',
             'mobile' => 'required|digits:9',
-            'data_time' => 'required',
             'entered_by' => 'required',
         ]);
 
@@ -121,7 +120,7 @@ class ProposalController extends Controller
             'team'=>$request->team,
             'organized_by'=>$request->organized_by,
             'mobile'=>$request->mobile,
-            'entered_date_time'=>$request->data_time,
+            'entered_date_time'=>Carbon::now('Asia/Kolkata'),
             'entered_by'=>$request->entered_by,
         ]);
 
@@ -133,7 +132,7 @@ class ProposalController extends Controller
         $proposal->team=$request->team;
         $proposal->organized_by=$request->organized_by;
         $proposal->mobile=$request->mobile;
-        $proposal->entered_date_time=$request->data_time;
+        $proposal->entered_date_time=Carbon::now('Asia/Kolkata');
         $proposal->entered_by=$request->entered_by;
         $proposal->save();
 

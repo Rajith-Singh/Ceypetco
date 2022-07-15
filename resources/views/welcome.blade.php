@@ -23,11 +23,6 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="/css/style.css" rel="stylesheet">
-
-    <!-- Side Bar -->
-    <link rel="stylesheet" href="/css/owl.carousel.min.css">
-    
-    <link rel="stylesheet" href="/css/style1.css">
 </head>
 
 <body>
@@ -52,9 +47,6 @@
                     <a class="text-white px-2" href="">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
-                    <a class="text-white px-2" href="">
-                        <i class="fab fa-instagram"></i>
-                    </a>
                     <a class="text-white pl-2" href="">
                         <i class="fab fa-youtube"></i>
                     </a>
@@ -63,6 +55,7 @@
         </div>
     </div>
     <!-- Topbar End -->
+
 
     <!-- Navbar Start -->
     <div class="container-fluid p-0">
@@ -75,12 +68,18 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
                 <div class="navbar-nav m-auto py-0">
-                    <a href="/user/add-proposal" class="nav-item nav-link active">Proposal Evaluation</a>
+                    <a href="#" class="nav-item nav-link active">Proposal Evaluation</a>
+                    <a href="#" class="nav-item nav-link">About</a>
                     <a href="#" class="nav-item nav-link">Service</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Login</a>
+                        <div class="dropdown-menu rounded-0 m-0">
+                            <a href="{{ route('user.login') }}" class="dropdown-item">User</a>
+                            <a href="{{ route('admin.login') }}" class="dropdown-item">Admin</a>
+                        </div>
+                    </div>
                 </div>
-                <a href="" class="btn btn-primary py-2 px-4 d-none d-lg-block">Get A Quote</a>
             </div>
-            <a href="#">Login</a> &nbsp &nbsp
         </nav>
     </div>
     <!-- Navbar End -->

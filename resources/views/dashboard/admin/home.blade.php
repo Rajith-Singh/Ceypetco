@@ -71,16 +71,9 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
                 <div class="navbar-nav m-auto py-0">
-                    <a href="index.html" class="nav-item nav-link active">Home</a>
-                    <a href="about.html" class="nav-item nav-link">Proposal Evaluation</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                        <div class="dropdown-menu rounded-0 m-0">
-                            <a href="blog.html" class="dropdown-item">Blog Grid</a>
-                            <a href="single.html" class="dropdown-item">Blog Detail</a>
-                        </div>
-                    </div>
-                    <a href="contact.html" class="nav-item nav-link">Contact</a>
+                    <a href="/admin/home" class="nav-item nav-link active">Home</a>
+                    <a href="{{ route('user.register')}}" class="nav-item nav-link">Add Users</a>
+                    <a href="#" class="nav-item nav-link">Service</a>
                 </div>
                 <a href="" class="btn btn-primary py-2 px-4 d-none d-lg-block">Get A Quote</a>
             </div>
@@ -90,24 +83,6 @@
         </nav>
     </div>
     <!-- Navbar End -->
-
-
-    <!-- Header Start -->
-    <div class="jumbotron jumbotron-fluid mb-5">
-        <div class="container text-center py-5">
-            <h1 class="text-white display-3 mb-5">Ceylon Petroleum Corporation</h1>
-			    <h1 class="text-primary mb-4">ENERGIZING THE FUTURE</h1>
-            <div class="mx-auto" style="width: 100%; max-width: 600px;">
-                <div class="input-group">
-                    <input type="text" class="form-control border-light" style="padding: 30px;" placeholder="Tracking Id">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary px-3">Track & Trace</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Header End -->
 
 
     <!-- About Start -->

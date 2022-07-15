@@ -47,9 +47,6 @@
                     <a class="text-white px-2" href="">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
-                    <a class="text-white px-2" href="">
-                        <i class="fab fa-instagram"></i>
-                    </a>
                     <a class="text-white pl-2" href="">
                         <i class="fab fa-youtube"></i>
                     </a>
@@ -71,70 +68,72 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
                 <div class="navbar-nav m-auto py-0">
-                    <a href="/admin/home" class="nav-item nav-link active">Home</a>
-                    <a href="{{ route('user.register')}}" class="nav-item nav-link">Add Users</a>
-                    <a href="#" class="nav-item nav-link">Service</a>
+                    <a href="index.html" class="nav-item nav-link active">Home</a>
+                    <a href="about.html" class="nav-item nav-link">About</a>
+                    <a href="service.html" class="nav-item nav-link">Service</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                        <div class="dropdown-menu rounded-0 m-0">
+                            <a href="blog.html" class="dropdown-item">Blog Grid</a>
+                            <a href="single.html" class="dropdown-item">Blog Detail</a>
+                        </div>
+                    </div>
+                    <a href="contact.html" class="nav-item nav-link">Contact</a>
                 </div>
-                <a href="" class="btn btn-primary py-2 px-4 d-none d-lg-block">Get A Quote</a>
             </div>
-            <a href="#">Hi {{ Auth::guard('admin')->user()->name }} </a> &nbsp &nbsp
-                <a href="{{ route('admin.logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
-                <form action="{{ route('admin.logout') }}" method="post" class="d-none" id="logout-form">@csrf</form>
         </nav>
     </div>
     <!-- Navbar End -->
 
-    <div class="container mt-5 m-auto">  
-    <br>
-    <h2 style="font-size:35px;"> Add User </h2> <br>
-        <form class="row g-3" method="post" action="{{ route('user.create') }}">
-        @if (Session::get('success'))
-            <div class="alert alert-info">
-                {{ Session::get('success') }}
-            </div>
-        @endif
-        @if (Session::get('fail'))
-            <div class="alert alert-danger">
-                {{ Session::get('fail') }}
-            </div>
-            @endif
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 offset-md-4" style="margin-top: 45px;">
+            <br>
+            <br>
+                 <center> <h4><b>Forgot Password</b></h4></center>
+            <br>
+                <form action="{{ route('user.forgot.password.link') }}" method="post" autocomplete="off">
+                @if (Session::get('fail'))
+                    <div class="alert alert-danger">
+                        {{ Session::get('fail') }}
+                    </div>
+                @endif
+
+                @if (Session::get('success'))
+                <div class="alert alert-success">
+                        {{ Session::get('success') }}
+                    </div>
+                @endif
+
         {{csrf_field()}}
 
-            <div class="col-md-12">
-                <label class="form-label"> <b> Name </b> </label>
-                <input type="text" class="form-control py-2" name="name" value="{{ old('name') }}">
-                <span class="text-danger">@error('name'){{ $message }} @enderror </span>
-            </div>
-			
-			<div class="col-md-12">
-                <label class="form-label"> <b> Email Address </b> </label>
-                <input type="text" class="form-control py-2" name="email"  value="{{ old('email') }}">
-                <span class="text-danger">@error('email'){{ $message }} @enderror </span>
-            </div>
-			
-			<div class="col-md-12">
-                <label class="form-label"> <b> Password </b> </label>
-                <input type="password" class="form-control py-2" name="password"  value="{{ old('password') }}">
-                <span class="text-danger">@error('password'){{ $message }} @enderror </span>
-            </div>
-			
-			<div class="col-md-12">
-                <label class="form-label"> <b> Confirm Password</b> </label>
-                <input type="password" class="form-control py-2" name="cpassword"  value="{{ old('cpassword') }}">
-                <span class="text-danger">@error('cpassword'){{ $message }} @enderror </span>
-            </div>
-            
-			<br><br><br><br>
-            <div class="col-12">
-                <button class="btn btn-primary" type="submit">Register</button>
-            </div>  
-            <br><br><br><br>
-            &nbsp&nbsp&nbsp <a href="{{ route('user.login') }}">I already have an account</a> 
-        </div>        
-        </form>
+                    @csrf
+                    <p> Enter your email address and we will send you a link to reset your password. </p>
+                      <div class="form-group">
+                          <label for="email">Email</label>
+                         
+                          <input type="text" class="form-control" name="email" placeholder="Enter email address" value="{{ old('email') }}">
+                          <span class="text-danger">@error('email'){{ $message }} @enderror </span>
 
-    <!-- Footer Start -->
-    <div class="container-fluid bg-dark text-white mt-5 py-5 px-sm-3 px-md-5">
+                      </div>
+
+                      
+                      <div class="form-group">
+                          <button type="submit" class="btn btn-primary">Send Reset Password Link</button>
+                      </div>
+                      <br>
+                      <a href="{{ route('user.login')}}">Login</a>
+                  </form>
+            </div>
+        </div>
+    </div>
+
+
+
+        <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-white mt-5 py-5 px-sm-3 px-md-5">
         <div class="row pt-5">
             <div class="col-lg-7 col-md-6">
                 <div class="row">

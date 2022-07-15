@@ -200,20 +200,12 @@
                 </div>    
                         <span class="text-danger">@error('mobile'){{ $message }} @enderror </span>
             </div>
-			
-			<div class="col-md-12">
-                <label class="form-label"> <b> Entered Date & Time </b> </label>
-                <input type="date" class="form-control py-2" name="data_time">
-                <span class="text-danger">@error('data_time'){{ $message }} @enderror </span>
-            </div>
 
             <div class="col-md-12">
-                <label class="form-label"> <b> Entered by </b> </label>
-                <input type="text" class="form-control py-2" name="entered_by" value="{{ Auth::guard('web')->user()->name }}" readonly>
-                <span class="text-danger">@error('entered_by'){{ $message }} @enderror </span>
+                <input type="text" class="form-control py-2" name="entered_by" value="{{ Auth::guard('web')->user()->name }}" readonly hidden>
             </div>
             
-			<br><br><br><br>
+			<br><br>
             <div class="col-12">
                 <button class="btn btn-primary" type="submit">Add</button>
                 <button class="btn btn-warning" type="reset">Clear</button>

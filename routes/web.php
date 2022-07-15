@@ -33,6 +33,10 @@ Route::prefix('user')->name('user.')->group(function(){
         Route::view('/register','dashboard.user.register')->name('register');
         Route::post('create',[UserController::class,'create'])->name('create');
         Route::post('/check',[UserController::class,'check'])->name('check');
+
+        Route::get('/password/forgot',[UserController::class,'showForgotForm'])->name('forgot.password.form');
+        Route::post('/password/forgot',[UserController::class,'sendResetLink'])->name('forgot.password.link');
+        Route::get('/password/reset/{token}',[UserController::class,'showResetForm'])->name('reset.password.form');
     });
 
     Route::middleware(['auth:web','PreventBackHistory'])->group(function(){
@@ -85,9 +89,6 @@ Route::post('/add_reply', [ProposalController::class, 'add_reply']);
 
 Route::post('/get-proposal', [ProposalController::class, 'getProposal']);
 
-// Route::get('/get-proposal', function () {
-//     return view('get-proposal');
-// });
 
 
 

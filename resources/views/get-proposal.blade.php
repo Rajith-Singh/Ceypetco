@@ -80,7 +80,7 @@
                 </div>
                 <a href="" class="btn btn-primary py-2 px-4 d-none d-lg-block">Get A Quote</a>
             </div>
-            <a href="#">Login</a> &nbsp &nbsp
+            <a href="{{ route('user.login') }}">Login</a> &nbsp &nbsp
         </nav>
     </div>
     <!-- Navbar End -->
